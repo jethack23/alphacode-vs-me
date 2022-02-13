@@ -17,7 +17,11 @@ My solustions and result of virtual participation at contests which alphacode pa
         - My standing : 2536
         - Number of participants : 10727
         - Percent ranking in paper : 23.6 %
-    - [ ] 1613
+    - [x] 1613
+        - ![1613_result](./assets/1613_virtual_result.png)
+        - My standing : 6305
+        - Number of participants : 14458
+        - Percent ranking in paper : 43.6 %
     - [ ] 1615
     - [ ] 1617
     - [ ] 1618
