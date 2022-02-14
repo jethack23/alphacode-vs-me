@@ -21,48 +21,32 @@
     (print (solution n lst))))
 
 
-(setv MOD 998244353)
+(setv mod 998244353)
 
-(defn add-and-mod [lst [MOD MOD]]
-  (setv rst 0)
-  (for [n lst]
-    (+= rst n))
-  (% rst MOD))
-
-(defn solution [n lst [MOD MOD]]
-  (setv mem (* [0] (+ n 3))
-        mem-hole-right (* [0] (+ n 3))
-        mem-hole-left (* [0] (+ n 3))
+(defn solution [n lst [mod mod]]
+  (setv mem1 (* [0] (+ n 3))
+        mem2 (* [0] (+ n 3))
         rst 0)
   (for [a lst]
-    ;; do mem of full numbers
-    (cond [(= a 0) (setv (get mem 0)
-                         (add-and-mod [(get mem 0)
-                                       (get mem 0)
-                                       1]))]
-          [True (setv (get mem a)
-                      (add-and-mod [(get mem a)
-                                    (get mem a)
-                                    (get mem (- a 1))]))])
-    ;; do mem-hole-right
-    (setv (get mem-hole-right a)
-          (add-and-mod [(get mem-hole-right a)
-                        (get mem-hole-right a)
-                        (get mem-hole-left (+ a 2))]))
-    ;; do mem-hole-left
-    (cond [(= a 0) None]
-          [(= a 1) (setv (get mem-hole-left 1)
-                         (add-and-mod [(get mem-hole-left 1)
-                                       (get mem-hole-left 1)
-                                       1]))]
-          [True (setv (get mem-hole-left a)
-                      (add-and-mod [(get mem-hole-left a)
-                                    (get mem-hole-left a)
-                                    (get mem-hole-right (- a 2))
-                                    (get mem (- a 2))]))]))
-  (for [m [mem mem-hole-left mem-hole-right]]
-    (+= rst (add-and-mod m)))
-  (% rst MOD))
+    ;; do mem1 of full numbers
+    (<<= (get mem1 a) 1)
+    (if (= a 0)
+        (+= (get mem1 0) 1)
+        (+= (get mem1 a) (get mem1 (- a 1))))
+    (%= (get mem1 a) mod)
+    ;; do mem2
+    (<<= (get mem2 a) 1)
+    (if (= a 1)
+        (+= (get mem2 1) 1))
+    (if (> a 1)
+        (+= (get mem2 a) (get mem1 (- a 2))))
+    (%= (get mem2 a) mod)
+    (<<= (get mem2 (+ a 2)) 1)
+    (%= (get mem2 (+ a 2)) mod))
+  (for [m [mem1 mem2]]
+    (+= rst (sum m))
+    (%= rst mod))
+  rst)
 
 ;;; TODO: copy and paste example inputs
 (setv examples ["4
