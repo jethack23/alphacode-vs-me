@@ -321,3 +321,7 @@ tags
 
 test*
 privacy*
+
+*submit.py
+*template.hy
+*run_transcompile.hy
