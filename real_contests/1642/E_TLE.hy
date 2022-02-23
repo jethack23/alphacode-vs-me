@@ -27,22 +27,19 @@
           (for [i (range l (+ r 1))]
             (setv (get result i) "NO"
                   changed True))
-          (do (setv notyet (lfor i (range l (+ r 1)) :if (= (get result i) "N/A") i)
+          (do (setv notyet (lfor i (range l (+ r 1)) :if (!= (get result i) "NO") i)
                     l (len notyet))
-              (cond [(= l 1) (setv (get result (notyet.pop)) "YES"
-                                   changed True)]
+              (cond [(= l 1) (setv (get result (notyet.pop)) "YES")]
                     [(> l 1) (not-settled.append notyet)])))
-      (while changed
-        (setv new-lst []
-              changed False)
+      (when changed
+        (setv new-lst [])
         (for [q not-settled]
-          (setv new-q (lfor j q :if (= (get result j) "N/A") j)
-                l (len new-q))
+          (setv q (lfor j q :if (!= (get result j) "NO") j)
+                l (len q))
           (cond [(> l 1)
-                 (new-lst.append new-q)]
+                 (new-lst.append q)]
                 [(= l 1)
-                 (setv (get result (new-q.pop)) "YES"
-                       changed True)]))
+                 (setv (get result (q.pop)) "YES")]))
         (setv not-settled new-lst)))
     (if (= (len query) 2)
         (print (get result (get query 1))))))
