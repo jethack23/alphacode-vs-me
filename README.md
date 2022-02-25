@@ -5,7 +5,7 @@ My solustions and result of virtual participation at contests which alphacode pa
 - [x] Solve 1553_D which the paper spoils
     - https://codeforces.com/contest/1553/problem/D
     - ![1553_d_result](./assets/1553_d.png)
-- [ ] Read the paper
+- [x] Read the paper
 - [ ] Participate virtually 10 Codeforces competitions in paper
     - [x] https://codeforces.com/contest/1591
         - ![1591_result](./assets/1591_virtual_result.png)
